@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard - Real-time Weather</title>
+    <link rel="stylesheet" href="weather-style.css">
+</head>
+<body>
+    <div class="weather-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🌍 Weather Dashboard</h1>
+                <p>Real-time Weather Information</p>
+            </div>
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    placeholder="Search city name..." 
+                    autocomplete="off"
+                >
+                <button id="searchBtn">🔍 Search</button>
+                <button id="locationBtn">📍 My Location</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Current Weather Card -->
+            <section class="current-weather">
+                <div class="weather-main" id="weatherMain">
+                    <div class="loading">⏳ Loading weather data...</div>
+                </div>
+            </section>
+
+            <!-- Hourly Forecast -->
+            <section class="hourly-forecast">
+                <h2>📅 Hourly Forecast</h2>
+                <div class="hourly-container" id="hourlyContainer">
+                    <p>Loading hourly data...</p>
+                </div>
+            </section>
+
+            <!-- 5-Day Forecast -->
+            <section class="daily-forecast">
+                <h2>📆 5-Day Forecast</h2>
+                <div class="forecast-grid" id="forecastGrid">
+                    <p>Loading forecast data...</p>
+                </div>
+            </section>
+
+            <!-- Additional Info -->
+            <section class="additional-info">
+                <h2>📊 Additional Information</h2>
+                <div class="info-grid" id="infoGrid">
+                    <div class="info-card">
+                        <div class="info-icon">💨</div>
+                        <div class="info-content">
+                            <p class="info-label">Wind Speed</p>
+                            <p class="info-value" id="windSpeed">--</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">💧</div>
+                        <div class="info-content">
+                            <p class="info-label">Humidity</p>
+                            <p class="info-value" id="humidity">--</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🔬</div>
+                        <div class="info-content">
+                            <p class="info-label">Pressure</p>
+                            <p class="info-value" id="pressure">--</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">👁️</div>
+                        <div class="info-content">
+                            <p class="info-label">Visibility</p>
+                            <p class="info-value" id="visibility">--</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">☀️</div>
+                        <div class="info-content">
+                            <p class="info-label">UV Index</p>
+                            <p class="info-value" id="uvIndex">--</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🌙</div>
+                        <div class="info-content">
+                            <p class="info-label">Feels Like</p>
+                            <p class="info-value" id="feelsLike">--</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>📡 Powered by OpenWeatherMap API | Last updated: <span id="lastUpdate">--:--</span></p>
+        </footer>
+    </div>
+
+    <script src="weather-script.js"></script>
+</body>
+</html>
