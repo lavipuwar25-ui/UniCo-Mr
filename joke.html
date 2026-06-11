@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Joke Generator</title>
+    <link rel="stylesheet" href="joke-style.css">
+</head>
+<body>
+    <div class="joke-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>😂 Joke Generator</h1>
+                <p>Get Random Jokes to Make You Laugh!</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Joke Display Card -->
+            <section class="joke-card">
+                <div class="joke-content" id="jokeContent">
+                    <p class="loading">⏳ Loading a funny joke...</p>
+                </div>
+            </section>
+
+            <!-- Joke Type Selection -->
+            <section class="joke-controls">
+                <h2>Choose Joke Type:</h2>
+                <div class="button-group">
+                    <button class="type-btn active" data-type="general">
+                        😄 General
+                    </button>
+                    <button class="type-btn" data-type="programming">
+                        💻 Programming
+                    </button>
+                    <button class="type-btn" data-type="knock-knock">
+                        🚪 Knock-Knock
+                    </button>
+                    <button class="type-btn" data-type="dark">
+                        🌑 Dark Humor
+                    </button>
+                    <button class="type-btn" data-type="spooky">
+                        👻 Spooky
+                    </button>
+                </div>
+            </section>
+
+            <!-- Action Buttons -->
+            <section class="action-buttons">
+                <button id="newJokeBtn" class="btn btn-primary">
+                    ➡️ Get New Joke
+                </button>
+                <button id="shareBtn" class="btn btn-secondary">
+                    📤 Share Joke
+                </button>
+                <button id="copyBtn" class="btn btn-secondary">
+                    📋 Copy Joke
+                </button>
+            </section>
+
+            <!-- Joke History -->
+            <section class="history-section">
+                <h2>📚 Joke History</h2>
+                <div class="history-list" id="historyList">
+                    <p class="empty-message">No jokes saved yet. Get some jokes first!</p>
+                </div>
+            </section>
+
+            <!-- Statistics -->
+            <section class="stats-section">
+                <h2>📊 Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-content">
+                            <p class="stat-label">Total Jokes</p>
+                            <p class="stat-value" id="totalJokes">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-content">
+                            <p class="stat-label">Favorite Jokes</p>
+                            <p class="stat-value" id="favoriteCount">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">😂</div>
+                        <div class="stat-content">
+                            <p class="stat-label">Last Joke Type</p>
+                            <p class="stat-value" id="lastType">General</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>😄 Powered by JokeAPI | Made with ❤️ for laughs</p>
+        </footer>
+    </div>
+
+    <script src="joke-script.js"></script>
+</body>
+</html>
