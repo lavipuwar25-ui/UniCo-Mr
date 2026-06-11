@@ -40,6 +40,181 @@
             0%, 100% { filter: drop-shadow(0 0 10px #00d4ff); }
             50% { filter: drop-shadow(0 0 20px #9d4edd); }
         }
+
+        /* Header Auth Section */
+        .header-auth {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, #00d4ff, #9d4edd);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .profile-container {
+            position: relative;
+        }
+
+        .profile-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #00d4ff;
+            transition: all 0.3s;
+        }
+
+        .profile-btn:hover {
+            color: #9d4edd;
+        }
+
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00d4ff, #9d4edd);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .profile-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #1a1a2e;
+            border: 1px solid #00d4ff;
+            border-radius: 8px;
+            min-width: 180px;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        .profile-dropdown.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #00d4ff33;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: #16213e;
+            color: #9d4edd;
+        }
+
+        .dropdown-item.logout {
+            color: #ff6b6b;
+        }
+
+        .dropdown-item.logout:hover {
+            background: #ff6b6b22;
+        }
+
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #1a1a2e;
+            border: 2px solid #00d4ff;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #00d4ff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .modal-title {
+            color: #00d4ff;
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .login-option {
+            background: #0f0f1e;
+            border: 1px solid #00d4ff33;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .login-option:hover {
+            border-color: #00d4ff;
+            background: #16213e;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+        }
+
+        .otp-section {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .otp-section.show {
+            display: block;
+        }
+
        .nav {
             position: fixed;
             bottom: 0;
@@ -254,7 +429,46 @@
             <span class="unicorn">🦄</span>
             <span>UniCo-Mr</span>
         </div>
-        <div id="userDisplay">Welcome!</div>
+        <div class="header-auth">
+            <div id="guestView">
+                <button class="login-btn" onclick="openLoginModal()">🔐 Login</button>
+            </div>
+            <div id="userView" class="profile-container" style="display:none;">
+                <button class="profile-btn" onclick="toggleProfileDropdown()">
+                    <div class="profile-avatar" id="profileAvatar">G</div>
+                    <span id="profileName">Guest</span>
+                </button>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-item" onclick="viewProfile()">👤 Profile</div>
+                    <div class="dropdown-item" onclick="viewSettings()">⚙️ Settings</div>
+                    <div class="dropdown-item logout" onclick="logout()">🚪 Logout</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeLoginModal()">✕</button>
+            <div class="modal-title">🔐 Login to UniCo-Mr</div>
+            
+            <div class="login-option" onclick="loginWith('google')">
+                🔵 Continue with Google
+            </div>
+            <div class="login-option" onclick="loginWith('apple')">
+                ⚫ Continue with Apple
+            </div>
+            <div class="login-option" onclick="showOTPSection()">
+                📱 Login with Mobile OTP
+            </div>
+
+            <div class="otp-section" id="otpSection">
+                <input type="text" id="modalUserName" placeholder="Your Name">
+                <input type="text" id="modalUserMobile" placeholder="Mobile Number">
+                <button class="btn" onclick="sendOTPFromModal()">Send OTP</button>
+            </div>
+        </div>
     </div>
 
     <div class="container">
@@ -335,7 +549,7 @@
                 <div class="profile-option" onclick="showOTPLogin()">
                     <strong>📱 Login with Mobile OTP</strong>
                 </div>
-                <div id="otpSection" style="display:none; margin-top:15px;">
+                <div id="otpSection2" style="display:none; margin-top:15px;">
                     <input type="text" id="userName" placeholder="Your Name">
                     <input type="text" id="userMobile" placeholder="Mobile Number">
                     <button class="btn" onclick="sendOTP()">Send OTP</button>
@@ -364,10 +578,126 @@
         let uploadedFile = null;
         let files = JSON.parse(localStorage.getItem('unicoFiles') || '[]');
         let globalPassword = localStorage.getItem('unicoGlobalPassword') || '';
-        let userName = localStorage.getItem('unicoUserName') || 'Guest';
+        let userName = localStorage.getItem('unicoUserName') || null;
+        let isLoggedIn = localStorage.getItem('unicoIsLoggedIn') === 'true';
 
-        // Display user
-        document.getElementById('userDisplay').textContent = 'Hi, ' + userName;
+        // Initialize auth UI
+        function initAuthUI() {
+            if (isLoggedIn && userName) {
+                updateUserUI();
+            } else {
+                showGuestUI();
+            }
+        }
+
+        function showGuestUI() {
+            document.getElementById('guestView').style.display = 'block';
+            document.getElementById('userView').style.display = 'none';
+            isLoggedIn = false;
+        }
+
+        function updateUserUI() {
+            document.getElementById('guestView').style.display = 'none';
+            document.getElementById('userView').style.display = 'flex';
+            document.getElementById('profileName').textContent = userName || 'User';
+            const initial = (userName || 'G').charAt(0).toUpperCase();
+            document.getElementById('profileAvatar').textContent = initial;
+            isLoggedIn = true;
+        }
+
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('show');
+            document.getElementById('otpSection').classList.remove('show');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('show');
+            document.getElementById('otpSection').classList.remove('show');
+        }
+
+        function toggleProfileDropdown() {
+            document.getElementById('profileDropdown').classList.toggle('show');
+        }
+
+        function closeProfileDropdown() {
+            document.getElementById('profileDropdown').classList.remove('show');
+        }
+
+        function viewProfile() {
+            alert('👤 Profile Details:\n\nName: ' + userName + '\n\nMore features coming soon!');
+            closeProfileDropdown();
+        }
+
+        function viewSettings() {
+            alert('⚙️ Settings page coming soon!');
+            closeProfileDropdown();
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                userName = null;
+                isLoggedIn = false;
+                localStorage.removeItem('unicoUserName');
+                localStorage.setItem('unicoIsLoggedIn', 'false');
+                showGuestUI();
+                closeProfileDropdown();
+                alert('✅ Logged out successfully!');
+            }
+        }
+
+        function showOTPSection() {
+            document.getElementById('otpSection').classList.toggle('show');
+        }
+
+        function loginWith(provider) {
+            alert('🔗 ' + provider.toUpperCase() + ' login integration coming soon!');
+        }
+
+        function sendOTPFromModal() {
+            const name = document.getElementById('modalUserName').value;
+            const mobile = document.getElementById('modalUserMobile').value;
+
+            if (!name || !mobile) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            if (mobile.length < 10) {
+                alert('Please enter a valid mobile number');
+                return;
+            }
+
+            userName = name;
+            isLoggedIn = true;
+            localStorage.setItem('unicoUserName', name);
+            localStorage.setItem('unicoIsLoggedIn', 'true');
+            updateUserUI();
+            closeLoginModal();
+            alert('📱 OTP sent to ' + mobile + '\n\nWelcome, ' + name + '!');
+        }
+
+        function showOTPLogin() {
+            document.getElementById('otpSection2').style.display = 
+                document.getElementById('otpSection2').style.display === 'none' ? 'block' : 'none';
+        }
+
+        function sendOTP() {
+            const name = document.getElementById('userName').value;
+            const mobile = document.getElementById('userMobile').value;
+
+            if (!name || !mobile) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            userName = name;
+            isLoggedIn = true;
+            localStorage.setItem('unicoUserName', name);
+            localStorage.setItem('unicoIsLoggedIn', 'true');
+            updateUserUI();
+            alert('📱 OTP sent to ' + mobile);
+            document.getElementById('otpSection2').style.display = 'none';
+        }
 
         // Tab switching
         function switchTab(tabName, btn) {
@@ -596,32 +926,19 @@
             document.getElementById('confirmPassword').value = '';
         }
 
-        function loginWith(provider) {
-            alert('🔗 ' + provider.toUpperCase() + ' login integration coming soon!');
-        }
-
-        function showOTPLogin() {
-            document.getElementById('otpSection').style.display = 
-                document.getElementById('otpSection').style.display === 'none' ? 'block' : 'none';
-        }
-
-        function sendOTP() {
-            const name = document.getElementById('userName').value;
-            const mobile = document.getElementById('userMobile').value;
-
-            if (!name || !mobile) {
-                alert('Please fill all fields');
-                return;
+        // Close modals when clicking outside
+        window.onclick = (e) => {
+            const modal = document.getElementById('loginModal');
+            if (e.target === modal) {
+                closeLoginModal();
             }
-
-            userName = name;
-            localStorage.setItem('unicoUserName', name);
-            document.getElementById('userDisplay').textContent = 'Hi, ' + name;
-            alert('📱 OTP sent to ' + mobile);
-            document.getElementById('otpSection').style.display = 'none';
-        }
+            if (e.target.id !== 'profileName' && e.target.id !== 'profileAvatar') {
+                closeProfileDropdown();
+            }
+        };
 
         // Initialize
+        initAuthUI();
         renderFilesTable();
     </script>
 </body>
